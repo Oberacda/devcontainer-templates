@@ -1,0 +1,32 @@
+{
+  "id": "ros2-robot-folders",
+  "version": "1.0.0",
+  "name": "ros2-robot-folders",
+  "description": "A image for working with ROS2 and robot-folders.",
+  "documentationURL": "https://github.com/Oberacda/devcontainer-templates/tree/main/src/ros-robot-folders",
+  "licenseURL": "https://github.com/Oberacda/devcontainer-templates/blob/main/LICENSE",
+  "options": {
+    "imageVariant": {
+      "type": "string",
+      "description": "ROS2 version:",
+      "proposals": ["humble", "jazzy", "kilted", "rolling"],
+      "default": "jazzy"
+    },
+    "additionalAptPackages": {
+      "type": "string",
+      "description": "Additional apt packages to install",
+      "default": ""
+    },
+    "username": {
+      "type": "string",
+      "description": "Username for remote user",
+      "proposals": ["doberacker", "ubuntu"],
+      "default": "doberacker"
+    },
+    "checkoutDir": {
+      "type": "string",
+      "description": "Path to checkout"
+    }
+  },
+  "platforms": ["Any"]
+}

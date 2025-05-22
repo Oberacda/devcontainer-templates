@@ -1,0 +1,28 @@
+{
+  "id": "general",
+  "version": "1.0.0",
+  "name": "general",
+  "description": "A general ubuntu based image for most of my dev needs.",
+  "documentationURL": "https://github.com/Oberacda/devcontainer-templates/tree/main/src/general",
+  "licenseURL": "https://github.com/Oberacda/devcontainer-templates/blob/main/LICENSE",
+  "options": {
+    "imageVariant": {
+      "type": "string",
+      "description": "Ubuntu version:",
+      "proposals": ["20.04", "22.04", "24.04", "24.10", "25.04"],
+      "default": "25.04"
+    },
+    "additionalAptPackages": {
+      "type": "string",
+      "description": "Additional apt packages to install",
+      "default": ""
+    },
+    "username": {
+      "type": "string",
+      "description": "Username for remote user",
+      "proposals": ["doberacker", "ubuntu"],
+      "default": "doberacker"
+    }
+  },
+  "platforms": ["Any"]
+}

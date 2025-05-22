@@ -1,0 +1,88 @@
+{
+  "name": "general",
+  "privileged": true,
+  "remoteUser": "${templateOption:username}",
+  "image": "ubuntu:${templateOption:imageVariant}",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "version": "latest",
+      "configureZshAsDefaultShell": true,
+      "username": "${templateOption:username}"
+      "userUid": "1000",
+      "userGid": "1000"
+    },
+    "ghcr.io/devcontainers/features/python:1": {},
+    "ghcr.io/devcontainers/features/conda:1": {},
+    "ghcr.io/devcontainers/features/rust:1": {
+      "version": "1.86"
+    },
+    "ghcr.io/devcontainers/features/nvidia-cuda:1": {
+      "installCudnn": "True",
+      "installCudnnDev": "True",
+      "installToolkit": "True"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/go:1": {},
+    "ghcr.io/devcontainers/features/node:1": {}, // for stuff like copilot, lsp
+    "ghcr.io/tadachs/devcontainer-features/neovim:latest": {},
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+      "packages": "stow,tmux,ccache,clang"
+    },
+    "ghcr.io/iterative/features/nvtop:1": {}
+  },
+  "containerEnv": {
+    "NVIDIA_VISIBLE_DEVICES": "all",
+    "CUDA_VISIBLE_DEVICES": "all",
+    "NVIDIA_DRIVER_CAPABILITIES": "compute,utility,graphics,video,display"
+  },
+  "runArgs": [
+    "--net=host",
+    "-e",
+    "DISPLAY=${env:DISPLAY}",
+    "-e",
+    "TERM=${env:TERM}",
+    "-e",
+    "SHELL=${env:SHELL}",
+    "-e",
+    "XDG_RUNTIME_DIR=${env:XDG_RUNTIME_DIR}",
+    "--runtime=nvidia",
+    "--gpus=all"
+  ],
+  "mounts": [
+    {
+      "source": "~/.ssh",
+      "target": "/home/${templateOption:username}/.ssh",
+      "type": "bind",
+      "consistency": "cached"
+    },
+    {
+      "source": "/run/user/1000",
+      "target": "/run/user/1000",
+      "type": "bind",
+      "consistency": "cached"
+    },
+    {
+      "source": "/tmp/.X11-unix",
+      "target": "/tmp/.X11-unix",
+      "type": "bind",
+      "consistency": "cached"
+    },
+    {
+      "source": "/dev/dri",
+      "target": "/dev/dri",
+      "type": "bind",
+      "consistency": "cached"
+    },
+    {
+      "source": "/dev/shm",
+      "target": "/dev/shm",
+      "type": "bind",
+      "consistency": "cached"
+    }
+  ],
+  "postCreateCommand": {
+    "video-group": "sudo usermod -aG video ${templateOption:username}",
+    "node-install": ". ${NVM_DIR}/nvm.sh && nvm install --lts"
+    "lazygit-install": "go install github.com/jesseduffield/lazygit@latest"
+  }
+}
