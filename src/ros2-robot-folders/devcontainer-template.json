@@ -1,6 +1,6 @@
 {
   "id": "ros2-robot-folders",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "ros2-robot-folders",
   "description": "A image for working with ROS2 and robot-folders.",
   "documentationURL": "https://github.com/Oberacda/devcontainer-templates/tree/main/src/ros-robot-folders",
